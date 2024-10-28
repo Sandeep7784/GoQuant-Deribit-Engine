@@ -1,0 +1,30 @@
+# Build directories
+build/
+cmake-build-*/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Compiled files
+*.o
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+
+# API Credentials
+config/config.json
+
+# Logs
+*.log
+
+# Dependencies
+lib/external/
+
+# OS specific
+.DS_Store
+Thumbs.db
