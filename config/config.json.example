@@ -1,0 +1,13 @@
+{
+    "api_credentials": {
+        "client_id": "your_client_id_here",
+        "client_secret": "your_client_secret_here"
+    },
+    "server": {
+        "websocket_port": 8080
+    },
+    "trading": {
+        "default_currency": "BTC",
+        "supported_instruments": ["BTC-PERPETUAL", "ETH-PERPETUAL"]
+    }
+}
