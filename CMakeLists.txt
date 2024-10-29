@@ -14,19 +14,26 @@ find_package(Boost REQUIRED COMPONENTS system)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
 
+# Find websocketpp
+find_package(websocketpp REQUIRED)
+
 # Include directories
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${JSONCPP_INCLUDE_DIRS}
+    ${websocketpp_INCLUDE_DIRS}
 )
 
 # Source files
 file(GLOB SOURCES "src/*.cpp")
 
-# Create executable
+# Create main executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Link libraries
+# Create test client executable
+add_executable(websocket_client_test tests/websocket_client_test.cpp)
+
+# Link libraries for main executable
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
     cpprestsdk::cpprest
@@ -35,7 +42,18 @@ target_link_libraries(${PROJECT_NAME}
     OpenSSL::Crypto
     ${Boost_LIBRARIES}
     ${JSONCPP_LIBRARIES}
-    # websocketpp
+    websocketpp::websocketpp
+)
+
+# Link libraries for test client
+target_link_libraries(websocket_client_test
+    PRIVATE
+    ${CMAKE_THREAD_LIBS_INIT}
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    ${Boost_LIBRARIES}
+    ${JSONCPP_LIBRARIES}
+    websocketpp::websocketpp
 )
 
 # Copy config file to build directory
